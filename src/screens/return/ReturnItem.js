@@ -3,7 +3,6 @@ import React from 'react';
 
 const ReturnItem = ({item}) => {
   const {product_returnName} = item;
-  console.log('product_returnName', product_returnName);
   return (
     <View>
       <Text>{product_returnName}</Text>

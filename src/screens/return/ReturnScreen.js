@@ -1,17 +1,23 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useEffect} from 'react';
-import {returnData} from '../../../assets/datas/ReturnData';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {returnData} from '../../../assets/data/ReturnData.js';
 import ReturnItem from './ReturnItem';
+import {SectionGrid} from 'react-native-super-grid';
 
 const ReturnScreen = () => {
+  const renderItem = ({item}) => (
+    <View style={{padding: 10}}>
+      <Text>{item.Product_no}</Text>
+    </View>
+  );
+
   return (
-    <View>
-      <Text>Hello</Text>
-      {returnData.map((index, item) => {
-        <View key={item.product_no}>
-          <ReturnItem item={item} />
-        </View>;
-      })}
+    <View style={{flex: 1}}>
+      <FlatList
+        data={returnData}
+        renderItem={renderItem}
+        keyExtractor={item => item.product_no.toString()}
+      />
     </View>
   );
 };
