@@ -1,14 +1,15 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {returnData} from '../../../assets/datas/ReturnData';
+import ReturnItem from './ReturnItem';
 
 const ReturnScreen = () => {
-  console.log(returnData);
   return (
     <View>
-      {returnData.map((index, returndata) => {
-        <View>
-          <Text>{returndata.product_returnName}</Text>
+      <Text>Hello</Text>
+      {returnData.map((index, item) => {
+        <View key={item.product_no}>
+          <ReturnItem item={item} />
         </View>;
       })}
     </View>
