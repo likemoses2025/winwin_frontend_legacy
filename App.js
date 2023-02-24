@@ -7,7 +7,7 @@
 
 import React from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import ReturnScreen from './src/screens/return/ReturnScreen';
+import ReturnScreen from './src/screens/ReturnScreen';
 
 const App = () => {
   return (

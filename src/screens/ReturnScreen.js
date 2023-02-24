@@ -1,20 +1,23 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {returnData} from '../../../assets/data/ReturnData.js';
-import ReturnItem from './ReturnItem';
 import {SectionGrid} from 'react-native-super-grid';
+import returnProductData from '../../assets/data/ReturnProductData';
 
 const ReturnScreen = () => {
-  const renderItem = ({item}) => (
-    <View style={{padding: 10}}>
-      <Text>{item.Product_no}</Text>
-    </View>
-  );
+  const renderItem = ({item}) => {
+    return (
+      <View style={{padding: 10}}>
+        <Text>{item.product_returnName}</Text>
+      </View>
+    );
+  };
 
   return (
-    <View style={{flex: 1}}>
+    <View>
+      <Text>Return Page</Text>
+
       <FlatList
-        data={returnData}
+        data={returnProductData}
         renderItem={renderItem}
         keyExtractor={item => item.product_no.toString()}
       />
