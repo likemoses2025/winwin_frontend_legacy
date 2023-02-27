@@ -5,17 +5,65 @@
  * @format
  */
 
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import ReturnScreen from './src/screens/ReturnScreen';
+import OrderScreen from './src/screens/orders/OrderScreen';
+import ProfileScreen from './src/screens/profile/ProfileScreen';
+import ReturnScreen from './src/screens/returns/ReturnScreen';
+import MainScreen from './src/screens/MainScreen';
+import LoginScreen from './src/screens/LoginScreen';
+import RegisterScreen from './src/screens/RegisterScreen';
+
+import Ionic from 'react-native-vector-icons/Ionicons';
 
 const App = () => {
+  const Stack = createNativeStackNavigator();
+  const Tab = createBottomTabNavigator();
+
+  const BottomTabScreen = () => {
+    return (
+      <Tab.Navigator
+        screenOptions={({route}) => ({
+          tabBarHideOnKeyboard: true,
+          tabBarShowLabel: true,
+          headerShown: false,
+          tabBarStyle: {
+            height: 50,
+          },
+          tabBarIcon: ({focused, size, colour}) => {
+            let iconName;
+            if (route.name === '홈') {
+              iconName = focused ? 'home-sharp' : 'home-outline';
+            } else if (route.name === '주문') {
+              iconName = focused ? 'cart' : 'cart-outline';
+            } else if (route.name === '반품') {
+              iconName = focused ? 'ios-trash-bin' : 'ios-trash-bin-outline';
+            } else if (route.name === '내정보') {
+              iconName = focused ? 'ios-person-circle' : 'ios-person-outline';
+            }
+
+            return <Ionic name={iconName} size={size} color={colour} />;
+          },
+        })}>
+        <Tab.Screen name="홈" component={MainScreen} />
+        <Tab.Screen name="주문" component={OrderScreen} />
+        <Tab.Screen name="반품" component={ReturnScreen} />
+        <Tab.Screen name="내정보" component={ProfileScreen} />
+      </Tab.Navigator>
+    );
+  };
+
   return (
-    <SafeAreaView>
-      <View>
-        <ReturnScreen />
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Bottom" component={BottomTabScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Register" component={RegisterScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
