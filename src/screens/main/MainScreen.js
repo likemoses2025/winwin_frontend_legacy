@@ -1,11 +1,12 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
 const MainScreen = () => {
   return (
-    <View>
-      <Text>MainScreen</Text>
-    </View>
+    <SafeAreaView style={{backgroundColor: 'white'}}>
+      <StatusBar backgroundColor="black" barStyle="dark-content" />
+      <Text>MainScreen22222</Text>
+    </SafeAreaView>
   );
 };
 

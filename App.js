@@ -13,11 +13,12 @@ import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import OrderScreen from './src/screens/orders/OrderScreen';
 import ProfileScreen from './src/screens/profile/ProfileScreen';
 import ReturnScreen from './src/screens/returns/ReturnScreen';
-import MainScreen from './src/screens/MainScreen';
+import MainScreen from './src/screens/main/MainScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 
 import Ionic from 'react-native-vector-icons/Ionicons';
+import ReturnCreate from './src/screens/returns/ReturnCreate';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -28,21 +29,25 @@ const App = () => {
       <Tab.Navigator
         screenOptions={({route}) => ({
           tabBarHideOnKeyboard: true,
-          tabBarShowLabel: true,
+          tabBarShowLabel: false,
           headerShown: false,
           tabBarStyle: {
-            height: 50,
+            height: 60,
           },
           tabBarIcon: ({focused, size, colour}) => {
             let iconName;
             if (route.name === '홈') {
               iconName = focused ? 'home-sharp' : 'home-outline';
+              colour = '#FF9500';
             } else if (route.name === '주문') {
               iconName = focused ? 'cart' : 'cart-outline';
+              colour = '#FF9500';
             } else if (route.name === '반품') {
               iconName = focused ? 'ios-trash-bin' : 'ios-trash-bin-outline';
+              colour = '#FF9500';
             } else if (route.name === '내정보') {
               iconName = focused ? 'ios-person-circle' : 'ios-person-outline';
+              colour = '#FF9500';
             }
 
             return <Ionic name={iconName} size={size} color={colour} />;
@@ -50,7 +55,8 @@ const App = () => {
         })}>
         <Tab.Screen name="홈" component={MainScreen} />
         <Tab.Screen name="주문" component={OrderScreen} />
-        <Tab.Screen name="반품" component={ReturnScreen} />
+        {/* <Tab.Screen name="반품" component={ReturnScreen} /> */}
+        <Tab.Screen name="반품" component={ReturnCreate} />
         <Tab.Screen name="내정보" component={ProfileScreen} />
       </Tab.Navigator>
     );
