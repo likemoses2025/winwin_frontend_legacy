@@ -9,12 +9,11 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
+import LoginScreen from './src/screens/LoginScreen';
+import MainScreen from './src/screens/main/MainScreen';
 import OrderScreen from './src/screens/orders/OrderScreen';
 import ProfileScreen from './src/screens/profile/ProfileScreen';
-import ReturnScreen from './src/screens/returns/ReturnScreen';
-import MainScreen from './src/screens/main/MainScreen';
-import LoginScreen from './src/screens/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 
 import Ionic from 'react-native-vector-icons/Ionicons';
