@@ -9,7 +9,10 @@ import ProfileScreen from './src/screens/profile/ProfileScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 
 import Ionic from 'react-native-vector-icons/Ionicons';
+
 import ReturnCreate from './src/screens/returns/ReturnCreate';
+import ReturnScreen from './src/screens/returns/ReturnScreen';
+import ReturnConfirm from './src/screens/returns/ReturnConfirm';
 
 const Main = () => {
   const Stack = createNativeStackNavigator();
@@ -48,7 +51,7 @@ const Main = () => {
         <Tab.Screen name="홈" component={MainScreen} />
         <Tab.Screen name="주문" component={OrderScreen} />
         {/* <Tab.Screen name="반품" component={ReturnScreen} /> */}
-        <Tab.Screen name="반품" component={ReturnCreate} />
+        <Tab.Screen name="반품" component={ReturnScreen} />
         <Tab.Screen name="내정보" component={ProfileScreen} />
       </Tab.Navigator>
     );
@@ -60,6 +63,8 @@ const Main = () => {
         <Stack.Screen name="Bottom" component={BottomTabScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen name="ReturnCreate" component={ReturnCreate} />
+        <Stack.Screen name="ReturnConfirm" component={ReturnConfirm} />
       </Stack.Navigator>
     </NavigationContainer>
   );

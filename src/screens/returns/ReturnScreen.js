@@ -1,13 +1,36 @@
-import {FlatList, SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {SectionGrid} from 'react-native-super-grid';
-import returnProductData from '../../../assets/datas/ReturnProductData';
+import React from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import {useNavigation} from '@react-navigation/native';
 
 const ReturnScreen = () => {
+  const navigation = useNavigation();
+
   return (
-    <SafeAreaView>
+    <View style={{flex: 1, backgroundColor: 'red'}}>
       <Text>Return Screen</Text>
-    </SafeAreaView>
+      <TouchableOpacity
+        style={{
+          position: 'absolute',
+          bottom: '5%',
+          right: '5%',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: 50,
+          height: 50,
+          borderRadius: 50,
+          backgroundColor: '#ff7d0d',
+        }}
+        onPress={() => navigation.navigate('ReturnCreate')}>
+        <AntDesign name="plus" size={24} color="white" />
+      </TouchableOpacity>
+    </View>
   );
 };
 

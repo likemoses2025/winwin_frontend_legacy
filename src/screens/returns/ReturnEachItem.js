@@ -1,53 +1,37 @@
 import React, {useState, useRef, useEffect, useCallback} from 'react';
 import {Animated, StyleSheet, Text, TextInput, View} from 'react-native';
 
-const ReturnEachItem = ({
-  item: {product_sapcode, product_returnName, product_returnPrice},
-}) => {
-  const [isFocused, setIsFocused] = useState(false);
+const ReturnEachItem = ({item, changeReturnValue}) => {
+  const {product_sapcode, product_returnName} = item;
 
-  const [product_returnCount, setProduct_returnCount] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
+  const [returnCount, set_returnCount] = useState('');
 
   const moveText = useRef(new Animated.Value(0)).current;
 
-  const onChangeCount = e => {
-    const {text} = e.nativeEvent;
-    setProduct_returnCount(text.replace(/[^0-9]/g, ''));
-  };
-
-  const handleInputChange = text => {
-    setProduct_returnCount(text.replace(/[^0-9]/g, '')); // 숫자 이외의 값은 모두 제거
-  };
-
-  // useEffect(() => {
-  //   if (product_returnCount !== '') {
-  //     moveTextTop();
-  //     setIsFocused(true);
-  //   } else if (product_returnCount === '') {
-  //     moveTextBottom();
-  //     setIsFocused(false);
-  //   }
-  // }, [product_returnCount, moveTextTop, moveTextBottom]);
+  // const onChangeCount = e => {
+  //   const {text} = e.nativeEvent;
+  //   set_returnCount(text.replace(/[^0-9]/g, ''));
+  // };
 
   useEffect(() => {
-    if (isFocused === true || product_returnCount !== '') {
-      setIsFocused(true);
+    changeReturnValue(product_sapcode, parseInt(returnCount));
+  }, [returnCount]);
+
+  useEffect(() => {
+    if (isFocused === true || returnCount !== '') {
       moveTextTop();
-    } else if (isFocused === false || product_returnCount === '') {
-      setIsFocused(false);
+    } else if (isFocused === false || returnCount === '') {
       moveTextBottom();
     }
-  }, [product_returnCount, moveTextTop, moveTextBottom, isFocused]);
+  }, [returnCount, moveTextTop, moveTextBottom, isFocused]);
 
   const onFocusHandler = () => {
-    // if (product_returnCount !== '') {
-    //   moveTextTop();
-    // }
     setIsFocused(true);
   };
 
   const onBlurHandler = () => {
-    if (product_returnCount === '') {
+    if (returnCount === '') {
       moveTextBottom();
     }
   };
@@ -106,8 +90,8 @@ const ReturnEachItem = ({
       <TextInput
         style={[styles.input, activeInputStyle]}
         autoCapitalize={'none'}
-        value={product_returnCount}
-        onChange={onChangeCount}
+        value={returnCount}
+        onChangeText={text => set_returnCount(text)}
         editable={true}
         onFocus={onFocusHandler}
         onBlur={onBlurHandler}
