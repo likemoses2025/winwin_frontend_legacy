@@ -5,14 +5,14 @@ const ReturnEachItem = ({item, changeReturnValue}) => {
   const {product_sapcode, product_returnName} = item;
 
   const [isFocused, setIsFocused] = useState(false);
-  const [returnCount, set_returnCount] = useState('');
+  const [returnCount, setReturnCount] = useState('');
 
   const moveText = useRef(new Animated.Value(0)).current;
 
-  // const onChangeCount = e => {
-  //   const {text} = e.nativeEvent;
-  //   set_returnCount(text.replace(/[^0-9]/g, ''));
-  // };
+  const onChangeCount = e => {
+    const text = e.nativeEvent;
+    setReturnCount(e.replace(/[^0-9]/g, ''));
+  };
 
   useEffect(() => {
     changeReturnValue(product_sapcode, parseInt(returnCount));
@@ -91,7 +91,7 @@ const ReturnEachItem = ({item, changeReturnValue}) => {
         style={[styles.input, activeInputStyle]}
         autoCapitalize={'none'}
         value={returnCount}
-        onChangeText={text => set_returnCount(text)}
+        onChangeText={text => onChangeCount(text)}
         editable={true}
         onFocus={onFocusHandler}
         onBlur={onBlurHandler}

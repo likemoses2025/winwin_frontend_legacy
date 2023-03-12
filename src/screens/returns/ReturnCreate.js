@@ -19,20 +19,21 @@ import {useNavigation} from '@react-navigation/native';
 const ReturnCreate = () => {
   const navigation = useNavigation();
 
-  const [returnInputData, setReturnInputData] = useState([]);
-  const [returnItem, setReturnItem] = useState([]);
+  const [returnItemList, setReturnItemList] = useState(returnProductData);
   const [filteredReturnList, setFilteredReturnList] = useState([]);
 
   const changeReturnValue = (product_sapcode, returnCount) => {
-    const newReturnList = returnProductData.map(item =>
+    const newReturnList = returnItemList.map(item =>
       item.product_sapcode === product_sapcode ? {...item, returnCount} : item,
     );
-    setReturnInputData(newReturnList);
+    setReturnItemList(newReturnList);
   };
 
   const filteredReturnInputData = e => {
-    const submitData = returnInputData.filter(item => item.returnCount > 0);
-    setFilteredReturnList(submitData);
+    console.log('returnItemList', returnItemList);
+    const submitData = returnItemList.filter(item => item.returnCount > 0);
+    console.log('SubmitData', submitData);
+    navigation.navigate('ReturnConfirm', {submitData: submitData});
   };
 
   return (
@@ -46,7 +47,7 @@ const ReturnCreate = () => {
       }}>
       {filteredReturnList.length > 0 ? (
         <View>
-          <Text>Wow</Text>
+          <Text>{filteredReturnList.product_no}1</Text>
         </View>
       ) : (
         <View
