@@ -1,20 +1,15 @@
+import {useNavigation} from '@react-navigation/native';
+import React, {useCallback, useState} from 'react';
 import {
-  FlatList,
-  Pressable,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {SectionGrid} from 'react-native-super-grid';
 import returnProductData from '../../../assets/datas/ReturnProductData';
-import ReturnEachItem from './ReturnEachItem';
 import {returnContainer, returnTitle} from '../../../styles/styles';
-import {useNavigation} from '@react-navigation/native';
+import ReturnEachItem from './ReturnEachItem';
 
 const ReturnCreate = () => {
   const navigation = useNavigation();
@@ -22,18 +17,21 @@ const ReturnCreate = () => {
   const [returnItemList, setReturnItemList] = useState(returnProductData);
   const [filteredReturnList, setFilteredReturnList] = useState([]);
 
-  const changeReturnValue = (product_sapcode, returnCount) => {
-    const newReturnList = returnItemList.map(item =>
-      item.product_sapcode === product_sapcode ? {...item, returnCount} : item,
-    );
-    setReturnItemList(newReturnList);
-  };
+  const changeReturnValue = useCallback(
+    (product_sapcode, returnCount) => {
+      const newReturnList = returnItemList.map(item =>
+        item.product_sapcode === product_sapcode
+          ? {...item, returnCount}
+          : item,
+      );
+      setReturnItemList(newReturnList);
+    },
+    [returnItemList],
+  );
 
   const filteredReturnInputData = e => {
-    console.log('returnItemList', returnItemList);
     const submitData = returnItemList.filter(item => item.returnCount > 0);
     console.log('SubmitData', submitData);
-    navigation.navigate('ReturnConfirm', {submitData: submitData});
   };
 
   return (

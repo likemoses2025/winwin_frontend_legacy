@@ -1,14 +1,18 @@
-import {View, Text} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
+import {View} from 'react-native';
+import gunnySackNumber from '../../../assets/datas/GunnySackNumber';
+import yearMonth from '../../../assets/datas/YearMonth';
+import SelectMenu from '../../components/common/SelectMenu';
 
-const ReturnConfirm = submitData => {
-  console.log('입력데이터', submitData);
+const ReturnConfirm = ({route}) => {
+  const submitData = route.params?.submitData;
+  console.log('SubmitData', submitData);
+  console.log('gunnySackNumber', gunnySackNumber);
+  console.log('yearMonth', yearMonth);
+
   return (
     <View>
-      <Text>ReturnConfirm</Text>
-      {/* {submitData.map((item, index) => (
-        <Text key={index}>{item.submitData.product_name}</Text>
-      ))} */}
+      <SelectMenu />
     </View>
   );
 };
