@@ -28,6 +28,12 @@ const ReturnCreate = () => {
     [returnItemList],
   );
 
+  const filteredData = () => {
+    const inputData = returnItemList.map(item => item.returnCount > 0);
+    console.log('Input DAta', inputData);
+    navigation.navigate('ReturnConfirm', {inputData: inputData});
+  };
+
   return (
     <View
       style={{
@@ -58,13 +64,7 @@ const ReturnCreate = () => {
             ))}
           </View>
         </ScrollView>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            navigation.navigate('ReturnConfirm', {
-              returnItemList: returnItemList,
-            })
-          }>
+        <TouchableOpacity style={styles.button} onPress={filteredData}>
           <Text style={styles.text}>등록하기</Text>
         </TouchableOpacity>
       </View>

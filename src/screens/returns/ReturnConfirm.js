@@ -1,21 +1,11 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Text, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import gunnySackNumber from '../../../assets/datas/GunnySackNumber';
 import yearMonth from '../../../assets/datas/YearMonth';
 
 const ReturnConfirm = ({route}) => {
-  const {returnItemList} = route.params;
+  const filteredInputData = route.params?.inputData;
   const [filterData, setFilterData] = useState('');
-
-  useEffect(() => {
-    filteredReturnInputData();
-  }, []);
-
-  // 입력값이 0보다 큰 값을 필터링
-  const filteredReturnInputData = useCallback(() => {
-    const filterInputData = returnItemList.filter(item => item.returnCount > 0);
-    setFilterData(filterInputData);
-  }, [returnItemList]);
 
   // 품목별 합계
 
@@ -26,8 +16,14 @@ const ReturnConfirm = ({route}) => {
   console.log('yearMonth', yearMonth);
 
   return (
-    <View>
+    <View style={{marginTop: 100}}>
+      <TouchableOpacity onPress={navigatiton.Back()}>
+        <Text>뒤로가기</Text>
+      </TouchableOpacity>
       <Text>ReturnConfirm</Text>
+      {filteredInputData.map(item => (
+        <Text>{item.product_no}</Text>
+      ))}
     </View>
   );
 };
