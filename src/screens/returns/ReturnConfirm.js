@@ -1,14 +1,19 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useCallback, useEffect, useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useState} from 'react';
+import {Text, TouchableOpacity, View} from 'react-native';
+import {Button} from 'react-native-paper';
+import SelectDropdown from 'react-native-select-dropdown';
 import gunnySackNumber from '../../../assets/datas/GunnySackNumber';
 import yearMonth from '../../../assets/datas/YearMonth';
-import SelectDropdown from 'react-native-select-dropdown';
+import Header from '../../../components/Header';
+import Table from '../../../components/Table';
+import {colors, defaultStyle} from '../../../styles/styles';
 
-const ReturnConfirm = ({route, navigation}) => {
-  const navigate = useNavigation();
+const ReturnConfirm = ({route}) => {
+  const navigation = useNavigation();
 
   const filteredInputData = route.params?.inputData;
+  console.log('필터데이터', filteredInputData);
 
   // 품목별 합계
 
@@ -20,10 +25,8 @@ const ReturnConfirm = ({route, navigation}) => {
   const [selectedYearMonth, setSelectedYearMonth] = useState('');
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigate.goBack()}>
-        <Text style={{fontSize: 40}}>뒤로가기</Text>
-      </TouchableOpacity>
+    <View style={{...defaultStyle, padding: 0}}>
+      <Header back={true} />
 
       <View
         style={{
@@ -74,19 +77,36 @@ const ReturnConfirm = ({route, navigation}) => {
           />
         </View>
       </View>
-
+      <View>
+        <Text>합계수량: 1234</Text>
+        <Text>합계금액: 234,345원</Text>
+      </View>
       {/* Table Data */}
+      <Text style={{paddingTop: 30}}>등록내역</Text>
+      <View
+        style={{
+          height: '50%',
+          borderWidth: 0.3,
+          borderColor: '#333333',
+          margin: 20,
+        }}>
+        <Table data={filteredInputData} />
+      </View>
+      <TouchableOpacity style={{marginTop: 40}}>
+        <Button
+          style={{
+            backgroundColor: colors.color3,
+            borderRadius: 100,
+            padding: 5,
+            margin: 10,
+          }}
+          textColor={colors.color2}
+          icon={'chevron-right'}>
+          등록하기
+        </Button>
+      </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-});
 
 export default ReturnConfirm;

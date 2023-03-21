@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -29,8 +29,7 @@ const ReturnCreate = () => {
   );
 
   const filteredData = () => {
-    const inputData = returnItemList.map(item => item.returnCount > 0);
-    console.log('Input DAta', inputData);
+    const inputData = returnItemList.filter(item => item.returnCount > 0);
     navigation.navigate('ReturnConfirm', {inputData: inputData});
   };
 
