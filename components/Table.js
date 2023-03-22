@@ -32,7 +32,9 @@ const Table = ({data}) => {
                 {i.returnCount}
               </DataTable.Cell>
               <DataTable.Cell style={{flex: 1}} numeric>
-                {i.returnCount * i.product_returnPrice}
+                {parseInt(i.returnCount * i.product_returnPrice, 10)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
               </DataTable.Cell>
             </DataTable.Row>
           ))}

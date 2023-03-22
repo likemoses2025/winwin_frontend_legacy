@@ -30,7 +30,9 @@ const ReturnCreate = () => {
 
   const filteredData = () => {
     const inputData = returnItemList.filter(item => item.returnCount > 0);
-    navigation.navigate('ReturnConfirm', {inputData: inputData});
+    navigation.navigate('ReturnConfirm', {
+      inputData: inputData,
+    });
   };
 
   return (

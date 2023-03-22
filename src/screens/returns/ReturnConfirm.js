@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {Button} from 'react-native-paper';
 import SelectDropdown from 'react-native-select-dropdown';
@@ -10,19 +10,46 @@ import Table from '../../../components/Table';
 import {colors, defaultStyle} from '../../../styles/styles';
 
 const ReturnConfirm = ({route}) => {
-  const navigation = useNavigation();
-
   const filteredInputData = route.params?.inputData;
-  console.log('필터데이터', filteredInputData);
-
-  // 품목별 합계
-
-  // 전체 수량, 전체 금액 계산
-
-  console.log('filteredInputData', filteredInputData);
-
+  const navigation = useNavigation();
+  const [sumBox, setSumBox] = useState('');
+  const [sumPrice, setSumPrice] = useState('');
   const [selectedGunnySack, setSelectedGunnySack] = useState('');
   const [selectedYearMonth, setSelectedYearMonth] = useState('');
+
+  const submitData = {
+    selectedGunnySack,
+    selectedYearMonth,
+    sumBox,
+    sumPrice,
+    filteredInputData,
+  };
+
+  // 전체 수량, 전체 금액 계산
+  useEffect(() => {
+    const totalBox = filteredInputData.reduce((acc, data) => {
+      return acc + data.returnCount;
+    }, 0);
+
+    setSumBox(totalBox);
+    const totalPrice = filteredInputData.reduce((acc, data) => {
+      const sum = data.returnCount * data.product_returnPrice;
+      return acc + sum;
+    }, 0);
+    setSumPrice(totalPrice);
+  }, [filteredInputData, sumBox, sumPrice]);
+
+  const formattedSumPrice = parseInt(sumPrice)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+  console.log('filteredInputData', filteredInputData);
+  console.log(Number(sumBox), sumPrice);
+
+  const submitHandler = () => {
+    console.log('SUBMIT DATA', submitData);
+    console.log('Submit');
+  };
 
   return (
     <View style={{...defaultStyle, padding: 0}}>
@@ -77,22 +104,56 @@ const ReturnConfirm = ({route}) => {
           />
         </View>
       </View>
-      <View>
-        <Text>합계수량: 1234</Text>
-        <Text>합계금액: 234,345원</Text>
-      </View>
+
       {/* Table Data */}
-      <Text style={{paddingTop: 30}}>등록내역</Text>
+      <Text
+        style={{
+          paddingTop: 30,
+          textAlign: 'center',
+          fontSize: 18,
+          fontWeight: '500',
+        }}>
+        등록내역
+      </Text>
       <View
         style={{
           height: '50%',
           borderWidth: 0.3,
           borderColor: '#333333',
-          margin: 20,
+          borderRadius: 10,
+          marginHorizontal: 20,
+          marginTop: 10,
         }}>
         <Table data={filteredInputData} />
       </View>
-      <TouchableOpacity style={{marginTop: 40}}>
+
+      <View
+        style={{
+          backgroundColor: '#EEEEEE',
+          borderWidth: 0.2,
+          borderRadius: 5,
+          margin: 20,
+          padding: 10,
+          paddingHorizontal: 20,
+          flexDirection: 'row',
+        }}>
+        <Text
+          style={{
+            flex: 4,
+            textAlign: 'center',
+            fontWeight: '800',
+            color: colors.color3,
+          }}>
+          합계 :{' '}
+        </Text>
+        <Text style={{flex: 1, fontWeight: '800', color: colors.color3}}>
+          {sumBox}
+        </Text>
+        <Text style={{flex: 1, fontWeight: '800', color: colors.color3}}>
+          {formattedSumPrice}
+        </Text>
+      </View>
+      <TouchableOpacity style={{marginTop: 40}} onPress={submitHandler}>
         <Button
           style={{
             backgroundColor: colors.color3,
