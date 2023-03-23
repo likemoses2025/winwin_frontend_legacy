@@ -61,3 +61,15 @@ export const returnTitle = StyleSheet.create({
   justifyContent: 'center',
   alignItems: 'center',
 });
+
+export const plusIcon = StyleSheet.create({
+  position: 'absolute',
+  bottom: '5%',
+  right: '5%',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: 50,
+  height: 50,
+  borderRadius: 50,
+  backgroundColor: '#ff7d0d',
+});

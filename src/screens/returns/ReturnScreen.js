@@ -1,32 +1,18 @@
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
+import React from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Heading from '../../../components/Heading';
+import {defaultStyle, plusIcon} from '../../../styles/styles';
 
 const ReturnScreen = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={{flex: 1, backgroundColor: 'red'}}>
-      <Text>Return Screen</Text>
+    <View style={defaultStyle}>
+      <Heading text2="반품리스트" />
       <TouchableOpacity
-        style={{
-          position: 'absolute',
-          bottom: '5%',
-          right: '5%',
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: 50,
-          height: 50,
-          borderRadius: 50,
-          backgroundColor: '#ff7d0d',
-        }}
+        style={plusIcon}
         onPress={() => navigation.navigate('ReturnCreate')}>
         <AntDesign name="plus" size={24} color="white" />
       </TouchableOpacity>

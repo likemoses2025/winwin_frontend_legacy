@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -8,6 +8,7 @@ import {
   View,
 } from 'react-native';
 import returnProductData from '../../../assets/datas/ReturnProductData';
+import Loader from '../../../components/Loader';
 import {returnContainer, returnTitle} from '../../../styles/styles';
 import ReturnEachItem from './ReturnEachItem';
 
@@ -15,6 +16,13 @@ const ReturnCreate = () => {
   const navigation = useNavigation();
 
   const [returnItemList, setReturnItemList] = useState(returnProductData);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
 
   const changeReturnValue = useCallback(
     (product_sapcode, returnCount) => {
@@ -28,7 +36,7 @@ const ReturnCreate = () => {
     [returnItemList],
   );
 
-  const filteredData = () => {
+  const submitHandler = () => {
     const inputData = returnItemList.filter(item => item.returnCount > 0);
     navigation.navigate('ReturnConfirm', {
       inputData: inputData,
@@ -44,31 +52,37 @@ const ReturnCreate = () => {
         flex: 1,
         backgroundColor: 'white',
       }}>
-      <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginBottom: 10,
-          flex: 1,
-          backgroundColor: 'white',
-        }}>
-        <Text style={returnTitle}>반품 등록하기</Text>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={returnContainer}>
-            {returnProductData.map(item => (
-              <View key={item.product_no}>
-                <ReturnEachItem
-                  item={item}
-                  changeReturnValue={changeReturnValue}
-                />
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginBottom: 10,
+              flex: 1,
+              backgroundColor: 'white',
+            }}>
+            <Text style={returnTitle}>반품 등록하기</Text>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <View style={returnContainer}>
+                {returnProductData.map(item => (
+                  <View key={item.product_no}>
+                    <ReturnEachItem
+                      item={item}
+                      changeReturnValue={changeReturnValue}
+                    />
+                  </View>
+                ))}
               </View>
-            ))}
+            </ScrollView>
+            <TouchableOpacity style={styles.button} onPress={submitHandler}>
+              <Text style={styles.text}>등록하기</Text>
+            </TouchableOpacity>
           </View>
-        </ScrollView>
-        <TouchableOpacity style={styles.button} onPress={filteredData}>
-          <Text style={styles.text}>등록하기</Text>
-        </TouchableOpacity>
-      </View>
+        </>
+      )}
     </View>
   );
 };

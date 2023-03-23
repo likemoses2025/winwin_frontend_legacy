@@ -1,4 +1,3 @@
-import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {Button} from 'react-native-paper';
@@ -9,9 +8,9 @@ import Header from '../../../components/Header';
 import Table from '../../../components/Table';
 import {colors, defaultStyle} from '../../../styles/styles';
 
-const ReturnConfirm = ({route}) => {
+const ReturnConfirm = ({route, navigation}) => {
   const filteredInputData = route.params?.inputData;
-  const navigation = useNavigation();
+
   const [sumBox, setSumBox] = useState('');
   const [sumPrice, setSumPrice] = useState('');
   const [selectedGunnySack, setSelectedGunnySack] = useState('');
@@ -43,12 +42,11 @@ const ReturnConfirm = ({route}) => {
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-  console.log('filteredInputData', filteredInputData);
-  console.log(Number(sumBox), sumPrice);
-
   const submitHandler = () => {
     console.log('SUBMIT DATA', submitData);
     console.log('Submit');
+
+    navigation.navigate('ReturnScreen');
   };
 
   return (

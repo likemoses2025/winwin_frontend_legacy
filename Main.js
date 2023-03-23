@@ -65,6 +65,7 @@ const Main = () => {
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="ReturnCreate" component={ReturnCreate} />
         <Stack.Screen name="ReturnConfirm" component={ReturnConfirm} />
+        <Stack.Screen name="ReturnScreen" component={ReturnScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
