@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect, useCallback} from 'react';
 import {Animated, StyleSheet, Text, TextInput, View} from 'react-native';
 
-const ReturnEachItem = ({item, changeReturnValue}) => {
+const ReturnInputItem = ({item, changeReturnValue}) => {
   const {product_sapcode, product_returnName} = item;
 
   const [isFocused, setIsFocused] = useState(false);
@@ -122,4 +122,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ReturnEachItem;
+export default ReturnInputItem;

@@ -10,7 +10,8 @@ import {
 import returnProductData from '../../../assets/datas/ReturnProductData';
 import Loader from '../../../components/Loader';
 import {returnContainer, returnTitle} from '../../../styles/styles';
-import ReturnEachItem from './ReturnEachItem';
+// import ReturnEachItem from './ReturnInputItem';
+import ReturnInputItem from './ReturnInputItem';
 
 const ReturnCreate = () => {
   const navigation = useNavigation();
@@ -48,7 +49,7 @@ const ReturnCreate = () => {
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={returnContainer}>
               {returnProductData.map(item => (
-                <ReturnEachItem
+                <ReturnInputItem
                   key={item.product_no}
                   item={item}
                   changeReturnValue={changeReturnValue}
