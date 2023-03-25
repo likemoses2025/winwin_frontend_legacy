@@ -10,25 +10,23 @@ const ReturnEachItem = ({item, changeReturnValue}) => {
   const moveText = useRef(new Animated.Value(0)).current;
 
   const onChangeCount = e => {
-    const text = e.nativeEvent;
     setReturnCount(e.replace(/[^0-9]/g, ''));
   };
 
   useEffect(() => {
     changeReturnValue(product_sapcode, parseInt(returnCount));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [returnCount]);
 
   useEffect(() => {
-    if (isFocused === true || returnCount !== '') {
+    if (isFocused || returnCount !== '') {
       moveTextTop();
-    } else if (isFocused === false || returnCount === '') {
+    } else {
       moveTextBottom();
     }
   }, [returnCount, moveTextTop, moveTextBottom, isFocused]);
 
-  const onFocusHandler = () => {
-    setIsFocused(true);
-  };
+  const onFocusHandler = () => setIsFocused(true);
 
   const onBlurHandler = () => {
     if (returnCount === '') {
@@ -59,11 +57,7 @@ const ReturnEachItem = ({item, changeReturnValue}) => {
   });
 
   const animStyle = {
-    transform: [
-      {
-        translateY: yVal,
-      },
-    ],
+    transform: [{translateY: yVal}],
   };
 
   const activeLabelStyle = {
@@ -74,8 +68,6 @@ const ReturnEachItem = ({item, changeReturnValue}) => {
   const activeInputStyle = {
     borderColor: !isFocused ? '#aaa' : '#ff7d0d',
   };
-
-  // '#ff7d0d'
 
   return (
     <View style={styles.container}>
@@ -89,10 +81,10 @@ const ReturnEachItem = ({item, changeReturnValue}) => {
       </Animated.View>
       <TextInput
         style={[styles.input, activeInputStyle]}
-        autoCapitalize={'none'}
+        autoCapitalize="none"
         value={returnCount}
         onChangeText={text => onChangeCount(text)}
-        editable={true}
+        editable
         onFocus={onFocusHandler}
         onBlur={onBlurHandler}
         blurOnSubmit
@@ -101,6 +93,7 @@ const ReturnEachItem = ({item, changeReturnValue}) => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {marginTop: 10},
   input: {

@@ -14,14 +14,11 @@ import ReturnEachItem from './ReturnEachItem';
 
 const ReturnCreate = () => {
   const navigation = useNavigation();
-
   const [returnItemList, setReturnItemList] = useState(returnProductData);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
+    setTimeout(() => setLoading(false), 2000);
   }, []);
 
   const changeReturnValue = useCallback(
@@ -38,58 +35,44 @@ const ReturnCreate = () => {
 
   const submitHandler = () => {
     const inputData = returnItemList.filter(item => item.returnCount > 0);
-    navigation.navigate('ReturnConfirm', {
-      inputData: inputData,
-    });
+    navigation.navigate('ReturnConfirm', {inputData});
   };
 
   return (
-    <View
-      style={{
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 10,
-        flex: 1,
-        backgroundColor: 'white',
-      }}>
+    <View style={styles.container}>
       {loading ? (
         <Loader />
       ) : (
         <>
-          <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginBottom: 10,
-              flex: 1,
-              backgroundColor: 'white',
-            }}>
-            <Text style={returnTitle}>반품 등록하기</Text>
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <View style={returnContainer}>
-                {returnProductData.map(item => (
-                  <View key={item.product_no}>
-                    <ReturnEachItem
-                      item={item}
-                      changeReturnValue={changeReturnValue}
-                    />
-                  </View>
-                ))}
-              </View>
-            </ScrollView>
-            <TouchableOpacity style={styles.button} onPress={submitHandler}>
-              <Text style={styles.text}>등록하기</Text>
-            </TouchableOpacity>
-          </View>
+          <Text style={returnTitle}>반품 등록하기</Text>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={returnContainer}>
+              {returnProductData.map(item => (
+                <ReturnEachItem
+                  key={item.product_no}
+                  item={item}
+                  changeReturnValue={changeReturnValue}
+                />
+              ))}
+            </View>
+          </ScrollView>
+          <TouchableOpacity style={styles.button} onPress={submitHandler}>
+            <Text style={styles.text}>등록하기</Text>
+          </TouchableOpacity>
         </>
       )}
     </View>
   );
 };
 
-export default ReturnCreate;
-
 const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+    flex: 1,
+    backgroundColor: 'white',
+  },
   button: {
     position: 'absolute',
     bottom: 10,
@@ -106,3 +89,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+export default ReturnCreate;

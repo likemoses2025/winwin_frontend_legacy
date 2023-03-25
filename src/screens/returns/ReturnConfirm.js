@@ -1,3 +1,5 @@
+// |Great! How can I assist you today?
+// |
 import React, {useEffect, useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {Button} from 'react-native-paper';
