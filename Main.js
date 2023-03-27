@@ -13,6 +13,10 @@ import Ionic from 'react-native-vector-icons/Ionicons';
 import ReturnCreate from './src/screens/returns/ReturnCreate';
 import ReturnScreen from './src/screens/returns/ReturnScreen';
 import ReturnConfirm from './src/screens/returns/ReturnConfirm';
+import AdminPanel from './src/screens/admin/AdminPanel';
+import ChangePassword from './src/screens/profile/ChangePassword';
+import Camera from './src/screens/camera/Camera';
+import EditProfile from './src/screens/profile/EditProfile';
 
 const Main = () => {
   const Stack = createNativeStackNavigator();
@@ -50,7 +54,6 @@ const Main = () => {
         })}>
         <Tab.Screen name="홈" component={MainScreen} />
         <Tab.Screen name="주문" component={OrderScreen} />
-        {/* <Tab.Screen name="반품" component={ReturnScreen} /> */}
         <Tab.Screen name="반품" component={ReturnScreen} />
         <Tab.Screen name="내정보" component={ProfileScreen} />
       </Tab.Navigator>
@@ -66,6 +69,12 @@ const Main = () => {
         <Stack.Screen name="ReturnCreate" component={ReturnCreate} />
         <Stack.Screen name="ReturnConfirm" component={ReturnConfirm} />
         <Stack.Screen name="ReturnScreen" component={ReturnScreen} />
+        <Stack.Screen name="AdminPanel" component={AdminPanel} />
+        <Stack.Screen name="ChangePassword" component={ChangePassword} />
+        <Stack.Screen name="OrderScreen" component={OrderScreen} />
+        <Stack.Screen name="Camera" component={Camera} />
+        <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+        <Stack.Screen name="EditProfile" component={EditProfile} />
       </Stack.Navigator>
     </NavigationContainer>
   );
