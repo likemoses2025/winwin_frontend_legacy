@@ -8,6 +8,7 @@ import {
   View,
 } from 'react-native';
 import returnProductData from '../../../assets/datas/ReturnProductData';
+import Header from '../../../components/Header';
 import Loader from '../../../components/Loader';
 import {returnContainer, returnTitle} from '../../../styles/styles';
 // import ReturnEachItem from './ReturnInputItem';
@@ -19,7 +20,7 @@ const ReturnCreate = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 2000);
+    setTimeout(() => setLoading(false), 1500);
   }, []);
 
   const changeReturnValue = useCallback(
@@ -41,11 +42,12 @@ const ReturnCreate = () => {
 
   return (
     <View style={styles.container}>
+      <Header back={true} />
       {loading ? (
         <Loader />
       ) : (
         <>
-          <Text style={returnTitle}>반품 등록하기</Text>
+          {/* <Text style={returnTitle}>반품 등록하기</Text> */}
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={returnContainer}>
               {returnProductData.map(item => (
@@ -68,7 +70,7 @@ const ReturnCreate = () => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 10,
     flex: 1,
