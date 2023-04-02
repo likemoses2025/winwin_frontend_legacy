@@ -152,33 +152,33 @@ const ReturnScreen = () => {
 
   return (
     <View style={defaultStyle}>
-      <View style={defaultStyle}>
-        <Header back={true} />
-        {/* Heading */}
-        <View style={{marginBottom: 20, paddingTop: 70}}>
-          <Text style={formHeading}>Orders</Text>
-        </View>
+      {/* <View style={defaultStyle}> */}
+      <Header back={true} />
+      {/* Heading */}
+      <View style={{marginBottom: 20, paddingTop: 70}}>
+        <Text style={formHeading}>Orders</Text>
+      </View>
 
-        <View style={{padding: 10, flex: 1}}>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {returnData.length > 0 ? (
-              returnData.map((item, index) => (
-                <ReturnItem
-                  key={item._id}
-                  id={item._id}
-                  i={index}
-                  date={item.date}
-                  gunnyNumber={item.gunnyNumber}
-                  amount={item.amount}
-                  box={item.box}
-                  return={item.return}
-                />
-              ))
-            ) : (
-              <Headline style={{textAlign: 'center'}}>No Returns Yet</Headline>
-            )}
-          </ScrollView>
-        </View>
+      <View style={{padding: 10, flex: 1}}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {returnData.length > 0 ? (
+            returnData.map((item, index) => (
+              <ReturnItem
+                key={item._id}
+                id={item._id}
+                i={index}
+                date={item.date}
+                gunnyNumber={item.gunnyNumber}
+                amount={item.amount}
+                box={item.box}
+                return={item.return}
+              />
+            ))
+          ) : (
+            <Headline style={{textAlign: 'center'}}>No Returns Yet</Headline>
+          )}
+        </ScrollView>
+        {/* </View> */}
       </View>
       <TouchableOpacity
         style={plusIcon}
